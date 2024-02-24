@@ -89,6 +89,12 @@ def recibir_mensajes(req):
                         numero = messages["from"]
 
                         enviar_mensajes_whatsapp(text,numero)
+                    
+                    elif tipo_interactivo == "list_reply":
+                        text = messages["interactive"]["list_reply"]["id"]
+                        numero = messages["from"]
+
+                        enviar_mensajes_whatsapp(text,numero)
 
                 if "text" in messages:
                     text = messages["text"]["body"]
@@ -283,7 +289,7 @@ def enviar_mensajes_whatsapp(texto,number):
             "interactive":{
                 "type" : "list",
                 "body": {
-                    "text": "Selecciona Alguna Opcion"
+                    "text": "Selecciona Alguna Opción"
                 },
                 "footer": {
                     "text": "Selecciona una de las opciones para poder ayudarte"
@@ -322,6 +328,28 @@ def enviar_mensajes_whatsapp(texto,number):
                         }
                     ]
                 }
+            }
+        }
+    elif "btncomprar" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": number,
+            "type": "text",
+            "text": {
+                "preview_url": False,
+                "body": "Los mejos articulos top en ofertas."
+            }
+        }
+    elif "btnvender" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": number,
+            "type": "text",
+            "text": {
+                "preview_url": False,
+                "body": "Excelente elección."
             }
         }
     else:
