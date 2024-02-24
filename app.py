@@ -330,7 +330,7 @@ def enviar_mensajes_whatsapp(texto,number):
                 }
             }
         }
-    elif "btncomprar" in texto:
+    elif "btncompra" in texto:
         data = {
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
